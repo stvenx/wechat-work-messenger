@@ -11,7 +11,7 @@ LABEL repository="https://github.com/chhpt/wechat-work-messenger.git"
 LABEL homepage="https://github.com/chhpt/wechat-work-messenger.git"
 LABEL maintainer="wuyiqing <cwuyiqing@gmail.com>"
 
-RUN apk --no-cache add curl
+RUN apk --no-cache add curl sed
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

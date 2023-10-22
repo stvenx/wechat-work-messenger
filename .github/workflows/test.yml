@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Send Notification
-        uses: chhpt/wechat-work-messenger@master
+        uses: stvenx/wechat-work-messenger@master
         env:
           BOT_KEY: ${{ secrets.BOT_KEY }}
           POST_MESSAGE: 'Action Build Success'
