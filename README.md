@@ -15,8 +15,6 @@ MESSAGE_FILE: 从MESSAGE_FILE中读取消息内容
 POST_MESSAGE和MESSAGE_FILE二选一
 
 ```yaml
-
-```yaml
 - name: Notify WeChat Work
   env:
     BOT_KEY: ${{ secrets.BOT_KEY }}
