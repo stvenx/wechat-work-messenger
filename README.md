@@ -6,13 +6,13 @@ This action wraps the [WeChat Work Bot Post Message API](https://developer.work.
 
 ## 用法
 
-将发送消息的的 key 参数配置到 GitHub Secret 中，并配置发送的 Markdown 消息。
-配置参数：
-BOT_KEY: wechat work bot key
-MSG_TYPE: 支持 text、markdown
-POST_MESSAGE: markdown message
-MESSAGE_FILE: 从MESSAGE_FILE中读取消息内容
-POST_MESSAGE和MESSAGE_FILE二选一
+将发送消息的的 key 参数配置到 GitHub Secret 中，并配置发送的 Markdown 消息。  
+配置参数：  
+BOT_KEY: wechat work bot key  
+MSG_TYPE: 支持 text、markdown  
+POST_MESSAGE: markdown message  
+MESSAGE_FILE: 从MESSAGE_FILE中读取消息内容  
+POST_MESSAGE和MESSAGE_FILE二选一  
 
 ```yaml
 - name: Notify WeChat Work
