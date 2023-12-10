@@ -15,12 +15,12 @@ jobs:
         env:
           BOT_KEY: ${{ secrets.BOT_KEY }}
           PHONE_MAPS: ${{ secrets.PHONE_MAPS }}
-          MSG_TYPE: markdown
+          MSG_TYPE: text
           POST_MESSAGE: |
             ### 收到新的 PR \n
-            > 创建者： <font color=\"info\"> ${{ github.event.pull_request.user.login }} </font> \n
-            > PR 标题： <font color=\"info\"> ${{ github.event.pull_request.title }} </font> \n
-            > PR 地址： <font color=\"info\"> [${{ github.event.pull_request.html_url }}]() </font> \n
-            > 项目地址： <font color=\"info\"> [${{ github.event.repository.html_url }}/actions](${{ github.event.repository.html_url }}/actions) </font> \n
+            > 创建者：  ${{ github.event.pull_request.user.login }} \n
+            > PR 标题： ${{ github.event.pull_request.title }}  \n
+            > PR 地址： ${{ github.event.pull_request.html_url }}  \n
+            > 项目地址： ${{ github.event.repository.html_url }}/actions \n
           ASSIGNEES: ${{ toJson(github.event.pull_request.assignees) }}
 

@@ -38,6 +38,7 @@ parse_phones() {
     result=${result%,}
     echo $result
 }
+
 echo "ASSIGNEES: $ASSIGNEES"
 echo "PHONE_MAPS: $PHONE_MAPS"
 ASSIGNEES=$(echo $ASSIGNEES | jq -r '.[] | .login')
