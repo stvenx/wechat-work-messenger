@@ -19,6 +19,30 @@ if [ -z "$POST_MESSAGE" ] && [ -n "$MESSAGE_FILE" ]; then
   POST_MESSAGE=$(sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/\\n/g' -e 's/"/\\"/g' "$MESSAGE_FILE")
 fi
 
+mentioned_mobile_list=""
+parse_phones() {
+    local mapstr=$1
+    local touser=$2
+    local result=""
+
+    IFS=',' read -ra pairs <<< "$mapstr"
+    for pair in "${pairs[@]}"; do
+        IFS=':' read -ra data <<< "$pair"
+        key=${data[0]}
+        value=${data[1]}
+        if [[ " $touser " = *" $key "* ]]; then
+            result="$result\"$value\","
+        fi
+    done
+
+    result=${result%,}
+    echo $result
+}
+echo "ASSIGNEES: $ASSIGNEES"
+echo "PHONE_MAPS: $PHONE_MAPS"
+mentioned_mobile_list=$(parse_phones "$PHONE_MAPS" "$ASSIGNEES")
+echo "mentioned_mobile_list: $mentioned_mobile_list"
+
 if [ "$MSG_TYPE" = "text" ]; then
   curl "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${BOT_KEY}" \
     -H "Content-Type: application/json" \
@@ -26,7 +50,8 @@ if [ "$MSG_TYPE" = "text" ]; then
   {
     "msgtype": "text",
     "text": {
-      "content": "${POST_MESSAGE}"
+      "content": "${POST_MESSAGE}",
+      "mentioned_mobile_list": [${mentioned_mobile_list}]
     }
   }
 END
@@ -37,7 +62,8 @@ else
   {
     "msgtype": "markdown",
     "markdown": {
-      "content": "${POST_MESSAGE}"
+      "content": "${POST_MESSAGE}",
+      "mentioned_mobile_list": [${mentioned_mobile_list}]
     }
   }
 END

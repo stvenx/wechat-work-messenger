@@ -1,0 +1,26 @@
+name: Send Notification
+on:
+  pull_request:
+    types: [assigned, opened, reopened]
+
+jobs:
+  notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Send Notification
+        uses: stvenx/wechat-work-messenger@master
+        env:
+          BOT_KEY: ${{ secrets.BOT_KEY }}
+          MSG_TYPE: markdown
+          POST_MESSAGE: |
+            ### 收到新的 PR \n
+            > 创建者： <font color=\"info\"> ${{ github.event.pull_request.user.login }} </font> \n
+            > PR 标题： <font color=\"info\"> ${{ github.event.pull_request.title }} </font> \n
+            > PR 地址： <font color=\"info\"> [${{ github.event.pull_request.html_url }}]() </font> \n
+            > 项目地址： <font color=\"info\"> [${{ github.event.repository.html_url }}/actions](${{ github.event.repository.html_url }}/actions) </font> \n
+          ASSIGNEES: ${{ toJson(github.event.pull_request.assignees) }}
+          PHONE_MAPS: ${{ secrets.PHONE_MAPS }}
+
