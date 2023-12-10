@@ -39,12 +39,12 @@ parse_phones() {
     echo $result
 }
 
-echo "ASSIGNEES: $ASSIGNEES"
-echo "PHONE_MAPS: $PHONE_MAPS"
 ASSIGNEES=$(echo $ASSIGNEES | jq -r '.[] | .login')
 echo "ASSIGNEES: $ASSIGNEES"
+ASSIGNEES="${ASSIGNEES//$'\n'/}"
+echo "ASSIGNEES: $ASSIGNEES"
+
 mentioned_mobile_list=$(parse_phones "$PHONE_MAPS" "$ASSIGNEES")
-echo "mentioned_mobile_list: $mentioned_mobile_list"
 
 if [ "$MSG_TYPE" = "text" ]; then
   curl "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${BOT_KEY}" \
