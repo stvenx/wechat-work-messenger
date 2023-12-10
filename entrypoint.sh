@@ -40,9 +40,7 @@ parse_phones() {
 }
 
 ASSIGNEES=$(echo $ASSIGNEES | jq -r '.[] | .login')
-echo "ASSIGNEES: $ASSIGNEES"
-ASSIGNEES="${ASSIGNEES//$'\n'/}"
-echo "ASSIGNEES: $ASSIGNEES"
+ASSIGNEES="${ASSIGNEES//$'\n'/ }"
 
 mentioned_mobile_list=$(parse_phones "$PHONE_MAPS" "$ASSIGNEES")
 
