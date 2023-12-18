@@ -1,0 +1,5 @@
+name: "WeChat Work Bot Message"
+description: "发送消息到企业微信群机器人"
+runs:
+  using: "docker"
+  image: "Dockerfile"
